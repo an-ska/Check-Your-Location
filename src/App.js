@@ -5,7 +5,7 @@ import LocationApp from './containers/LocationApp';
 class App extends Component {
   render() {
     return (
-      <LocationApp/>
+      <LocationApp />
     );
   }
 }
