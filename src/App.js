@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import Test from './components/Test';
+import LocationApp from './containers/LocationApp';
 
 class App extends Component {
   render() {
     return (
-      <Test/>
+      <LocationApp/>
     );
   }
 }
