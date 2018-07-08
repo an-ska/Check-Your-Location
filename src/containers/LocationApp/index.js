@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import styles from './LocationApp.module.css';
 import SearchForm from '../../components/SearchForm';
 import Map from '../../components/Map';
+import LastSearchInformation from '../../components/LastSearchInformation';
+import AllSearchInformation from '../../components/AllSearchInformation';
 
 const apiUrl = 'http://api.ipstack.com/';
 const apiKey = '6bec72027b1965bcb7b7078ceb53db2a';
@@ -36,6 +38,7 @@ class LocationApp extends Component {
 
   render() {
     const { location } = this.state;
+    const lastSearch = location[location.length -1];
     console.log(this.state.location)
 
     return (
@@ -44,10 +47,34 @@ class LocationApp extends Component {
         <SearchForm getLocation={this.getLocation} />
         {
           location.length > 0 &&
-            <Map
-              latitude={(location[location.length -1]).latitude}
-              longitude={(location[location.length -1]).longitude}
-            />
+            <div>
+              <Map
+                latitude={lastSearch.latitude}
+                longitude={lastSearch.longitude}
+              />
+              <h2 className={styles.title}>Last search information</h2>
+              <LastSearchInformation
+                ip={lastSearch.ip}
+                city={lastSearch.city}
+                capital={lastSearch.location.capital}
+                country={lastSearch.country_name}
+                flag={lastSearch.location.country_flag_emoji}
+                continent={lastSearch.continent_name}
+                callingCode={lastSearch.location.calling_code}
+              />
+              <h2 className={styles.title}>All search information</h2>
+              {
+                location.map(data => (
+                  <AllSearchInformation
+                    ip={data.ip}
+                    city={data.city}
+                    country={data.country_name}
+                    flag={data.location.country_flag_emoji}
+                    continent={data.continent_name}
+                  />
+                ))
+              }
+            </div>
         }
       </div>
     )
