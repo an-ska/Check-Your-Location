@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import styles from './LocationApp.module.css';
 import SearchForm from '../../components/SearchForm';
 import Map from '../../components/Map';
-import LastSearchInformation from '../../components/LastSearchInformation';
+import IPInformation from '../../components/IPInformation';
 import AllSearchInformation from '../../components/AllSearchInformation';
 
 const apiUrl = 'http://api.ipstack.com/';
@@ -12,48 +12,84 @@ class LocationApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: [],
+      userLocation: "",
+      searchedLocation: []
     }
   }
 
   componentDidMount() {
-    this.getLocation('89.64.51.124')
+    this.getUserLocation();
   }
 
-  getLocation = (ip) => {
+  getUserLocation = () => {
+    const requestUrl = `${apiUrl}check?access_key=${apiKey}`;
+
+    fetch(requestUrl)
+      .then((response) => response.json())
+      .then(user => {
+        return this.setState({
+          userLocation: {
+            latitude: user.latitude,
+            longitude: user.longitude,
+            ip: user.ip,
+            city: user.city,
+            capital: user.location.capital,
+            country: user.country_name,
+            flag: user.location.country_flag_emoji,
+            continent: user.continent_name,
+            callingCode: user.location.calling_code
+           }
+        })
+      })
+  }
+
+  getSearchedLocation = (ip) => {
 	  const requestUrl = `${apiUrl}${ip}?access_key=${apiKey}`;
-    console.log(requestUrl)
 
   	fetch(requestUrl)
       .then((response) => response.json())
-      .then(location => {
+      .then(searchedLocation => {
         return this.setState({
-          location: [
-            ...this.state.location,
-            location,
+          searchedLocation: [
+            ...this.state.searchedLocation,
+            searchedLocation,
           ],
         })
       })
   }
 
   render() {
-    const { location } = this.state;
-    const lastSearch = location[location.length -1];
-    console.log(this.state.location)
+    const { userLocation, searchedLocation } = this.state;
+    const lastSearch = searchedLocation[searchedLocation.length -1];
 
     return (
       <div className={styles.container}>
         <h1>Check Your Location!</h1>
-        <SearchForm getLocation={this.getLocation} />
+        <Map
+          latitude={userLocation.latitude}
+          longitude={userLocation.longitude}
+        />
+        <h2 className={styles.title}>Information about your location</h2>
+        <IPInformation
+          ip={userLocation.ip}
+          city={userLocation.city}
+          capital={userLocation.capital}
+          country={userLocation.country}
+          flag={userLocation.flag}
+          continent={userLocation.continent}
+          callingCode={userLocation.callingCode}
+        />
+
+        <SearchForm getSearchedLocation={this.getSearchedLocation} />
         {
-          location.length > 0 &&
+          searchedLocation.length > 0 &&
             <div>
               <Map
                 latitude={lastSearch.latitude}
                 longitude={lastSearch.longitude}
               />
               <h2 className={styles.title}>Last search information</h2>
-              <LastSearchInformation
+              <IPInformation
                 ip={lastSearch.ip}
                 city={lastSearch.city}
                 capital={lastSearch.location.capital}
@@ -64,7 +100,7 @@ class LocationApp extends Component {
               />
               <h2 className={styles.title}>All search information</h2>
               {
-                location.map(data => (
+                searchedLocation.map(data => (
                   <AllSearchInformation
                     ip={data.ip}
                     city={data.city}

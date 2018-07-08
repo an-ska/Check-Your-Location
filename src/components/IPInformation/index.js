@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './LastSearchInformation.module.css';
+import styles from './IPInformation.module.css';
 
-const LastSearchInformation = ({ ip, city, capital, country, flag, continent, callingCode }) => (
+const IPInformation = ({ ip, city, capital, country, flag, continent, callingCode }) => (
   <div>
     <p>IP: {ip} </p>
     {
@@ -17,7 +17,7 @@ const LastSearchInformation = ({ ip, city, capital, country, flag, continent, ca
 
     <p>country: {country} </p>
     <p>country flag: {flag} </p>
-    <p>continent: {continent}</p>
+    <p>continent: {continent} </p>
     {
       callingCode != null
       &&
@@ -26,4 +26,4 @@ const LastSearchInformation = ({ ip, city, capital, country, flag, continent, ca
   </div>
 )
 
-export default LastSearchInformation;
+export default IPInformation;

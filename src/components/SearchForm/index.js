@@ -4,7 +4,7 @@ import Button from '../Button';
 
 class SearchForm extends Component {
   state = {
-    input: ''
+    input: ""
   }
 
   updateInput = (event) => {
@@ -14,17 +14,17 @@ class SearchForm extends Component {
   }
 
   handleClick = () => {
-    this.props.getLocation(this.state.input);
+    this.props.getSearchedLocation(this.state.input);
     this.setState({
-      input: ''
+      input: ""
     });
   }
 
   handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      this.props.getLocation(this.state.input);
+      this.props.getSearchedLocation(this.state.input);
       this.setState({
-        input: ''
+        input: ""
       })
     }
   }
@@ -34,11 +34,17 @@ class SearchForm extends Component {
 
     return (
       <div>
-        <div>
-          <input type="text" value={input} onChange={this.updateInput} onKeyPress={this.handleKeyPress} />
-          <label>Enter IP</label>
-        </div>
-        <Button text="Search" handleClick={this.handleClick} />
+        <input
+          type="text"
+          value={input}
+          onChange={this.updateInput}
+          onKeyPress={this.handleKeyPress}
+        />
+        <label>Enter IP</label>
+        <Button
+          text="Search"
+          handleClick={this.handleClick}
+        />
       </div>
     )
   }
