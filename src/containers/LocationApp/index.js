@@ -13,12 +13,21 @@ class LocationApp extends Component {
     super(props);
     this.state = {
       userLocation: "",
-      searchedLocation: []
+      searchedLocation: [],
     }
   }
 
   componentDidMount() {
     this.getUserLocation();
+    sessionStorage.getItem('searchHistory')
+    &&
+    this.setState({
+      searchedLocation: JSON.parse(sessionStorage.getItem('searchHistory'))
+    });
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    sessionStorage.setItem('searchHistory', JSON.stringify(nextState.searchedLocation));
   }
 
   getUserLocation = () => {
@@ -49,6 +58,7 @@ class LocationApp extends Component {
   	fetch(requestUrl)
       .then((response) => response.json())
       .then(searchedLocation => {
+
         return this.setState({
           searchedLocation: [
             ...this.state.searchedLocation,
