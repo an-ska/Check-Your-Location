@@ -61,6 +61,7 @@ class LocationApp extends Component {
   render() {
     const { userLocation, searchedLocation } = this.state;
     const lastSearch = searchedLocation[searchedLocation.length -1];
+    let id = 0;
 
     return (
       <div className={styles.container}>
@@ -102,6 +103,7 @@ class LocationApp extends Component {
               {
                 searchedLocation.map(data => (
                   <AllSearchInformation
+                    key={id++}
                     ip={data.ip}
                     city={data.city}
                     country={data.country_name}
