@@ -1,0 +1,34 @@
+:root {
+  --errorColor: #CE1126;
+}
+
+.errorContainer {
+  min-height: 40px;
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.errorIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 15px;
+  color: #FFF;
+  background: var(--errorColor);
+  border: 1px solid var(--errorColor);
+  border-top-left-radius: 34px;
+  border-bottom-left-radius: 34px;
+}
+
+.errorText {
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  color: var(--errorColor);
+  font-weight: bold;
+  background: #FFF;
+  border: 1px solid var(--errorColor);
+  border-top-right-radius: 34px;
+  border-bottom-right-radius: 34px;
+}

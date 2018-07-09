@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import styles from './LocationApp.module.css';
 import SearchForm from '../../components/SearchForm';
+import Loader from '../../components/Loader';
+import ErrorMessage from '../../components/ErrorMessage';
 import Map from '../../components/Map';
 import IPInformation from '../../components/IPInformation';
 import AllSearchInformation from '../../components/AllSearchInformation';
@@ -14,6 +16,8 @@ class LocationApp extends Component {
     this.state = {
       userLocation: "",
       searchedLocation: [],
+      hasError: false,
+      isLoading: false
     }
   }
 
@@ -33,10 +37,14 @@ class LocationApp extends Component {
   getUserLocation = () => {
     const requestUrl = `${apiUrl}check?access_key=${apiKey}`;
 
+    this.setState({
+      isLoading: true
+    })
+
     fetch(requestUrl)
       .then((response) => response.json())
       .then(user => {
-        return this.setState({
+        this.setState({
           userLocation: {
             latitude: user.latitude,
             longitude: user.longitude,
@@ -47,9 +55,16 @@ class LocationApp extends Component {
             flag: user.location.country_flag_emoji,
             continent: user.continent_name,
             callingCode: user.location.calling_code
-           }
+          },
+          isLoading: false
         })
       })
+      .catch(e => {
+        this.setState({
+          hasError: true,
+          isLoading: false,
+        })
+      });
   }
 
   getSearchedLocation = (ip) => {
@@ -58,24 +73,45 @@ class LocationApp extends Component {
   	fetch(requestUrl)
       .then((response) => response.json())
       .then(searchedLocation => {
-
-        return this.setState({
+        this.setState({
           searchedLocation: [
             ...this.state.searchedLocation,
             searchedLocation,
           ],
+          isLoading: false
         })
       })
+      .catch(e => {
+        this.setState({
+          hasError: true,
+          isLoading: false,
+        })
+      });
   }
 
   render() {
-    const { userLocation, searchedLocation } = this.state;
+    const { isLoading, hasError, userLocation, searchedLocation } = this.state;
     const lastSearch = searchedLocation[searchedLocation.length -1];
     let id = 0;
 
     return (
       <div className={styles.container}>
-        <h1>Check Your Location!</h1>
+        <h1 className={styles.title}>Check Your Location!</h1>
+        {
+          isLoading
+          &&
+          <Loader
+            text="Loading..."
+          />
+        }
+        {
+          hasError
+          &&
+          <ErrorMessage
+            icon='fa-exclamation-circle'
+            text='Results cannot be shown'
+          />
+        }
         <Map
           latitude={userLocation.latitude}
           longitude={userLocation.longitude}
@@ -90,7 +126,6 @@ class LocationApp extends Component {
           continent={userLocation.continent}
           callingCode={userLocation.callingCode}
         />
-
         <SearchForm getSearchedLocation={this.getSearchedLocation} />
         {
           searchedLocation.length > 0 &&
