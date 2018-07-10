@@ -3,6 +3,6 @@
   padding: 10px 10px;
   color: #FFF;
   text-align: center;
-  background: #AC1E44;
+  background: var(--accentColor);
   border-radius: 100%;
 }

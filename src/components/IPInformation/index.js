@@ -1,27 +1,38 @@
-import React from 'react';
-import styles from './IPInformation.module.css';
+import React from "react";
+import styles from "./IPInformation.module.css";
 
 const IPInformation = ({ ip, city, capital, country, flag, continent, callingCode }) => (
-  <div>
-    <p>IP: {ip} </p>
+  <div className={styles.textBox}>
+    <p className={styles.text}>IP: {ip} </p>
     {
       city != null
       &&
-      <p>city: {city} </p>
+      <p className={styles.text}>city: {city} </p>
     }
     {
       capital != null
       &&
-      <p>capital: {capital} </p>
+      <p className={styles.text}>capital: {capital} </p>
     }
-
-    <p>country: {country} </p>
-    <p>country flag: {flag} </p>
-    <p>continent: {continent} </p>
+    {
+      country != null
+      &&
+      <p className={styles.text}>country: {country} </p>
+    }
+    {
+      flag != null
+      &&
+      <p className={styles.text}>country flag: {flag} </p>
+    }
+    {
+      continent != null
+      &&
+      <p className={styles.text}>continent: {continent} </p>
+    }
     {
       callingCode != null
       &&
-      <p>calling code: {callingCode} </p>
+      <p className={styles.text}>calling code: {callingCode} </p>
     }
   </div>
 )

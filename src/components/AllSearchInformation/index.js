@@ -1,17 +1,29 @@
-import React from 'react';
-import styles from './AllSearchInformation.module.css';
+import React from "react";
+import styles from "./AllSearchInformation.module.css";
 
 const AllSearchInformation = ({ ip, city, country, flag, continent }) => (
-  <div className={styles.container}>
-    <p>IP: {ip} </p>
+  <div className={styles.textBox}>
+    <p className={styles.text}>IP: {ip} </p>
     {
       city != null
       &&
-      <p>city: {city} </p>
+      <p className={styles.text}>city: {city} </p>
     }
-    <p>country: {country} </p>
-    <p>country flag: {flag} </p>
-    <p>continent: {continent}</p>
+    {
+      country != null
+      &&
+      <p className={styles.text}>country: {country} </p>
+    }
+    {
+      flag != null
+      &&
+      <p className={styles.text}>country flag: {flag} </p>
+    }
+    {
+      continent != null
+      &&
+      <p className={styles.text}>continent: {continent}</p>
+    }
   </div>
 )
 

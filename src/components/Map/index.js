@@ -1,7 +1,7 @@
 import React from "react";
-import GoogleMapReact from 'google-map-react';
-import styles from './Map.module.css';
-import MapMarker from '../MapMarker';
+import GoogleMapReact from "google-map-react";
+import styles from "./Map.module.css";
+import MapMarker from "../MapMarker";
 
 const Map = ({ latitude, longitude }) => (
   <div className={styles.map}>
@@ -12,7 +12,7 @@ const Map = ({ latitude, longitude }) => (
       <MapMarker
         latitude={latitude}
         longitude={longitude}
-        text="Here!"
+        icon="fa-map-marker-alt"
       />
     </GoogleMapReact>
   </div>

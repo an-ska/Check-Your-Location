@@ -1,14 +1,14 @@
-import React, { Component, Fragment } from 'react';
-import styles from './LocationApp.module.css';
-import SearchForm from '../../components/SearchForm';
-import Loader from '../../components/Loader';
-import ErrorMessage from '../../components/ErrorMessage';
-import Map from '../../components/Map';
-import IPInformation from '../../components/IPInformation';
-import AllSearchInformation from '../../components/AllSearchInformation';
+import React, { Component, Fragment } from "react";
+import styles from "./LocationApp.module.css";
+import SearchForm from "../../components/SearchForm";
+import Loader from "../../components/Loader";
+import ErrorMessage from "../../components/ErrorMessage";
+import Map from "../../components/Map";
+import IPInformation from "../../components/IPInformation";
+import AllSearchInformation from "../../components/AllSearchInformation";
 
-const apiUrl = 'http://api.ipstack.com/';
-const apiKey = '6bec72027b1965bcb7b7078ceb53db2a';
+const apiUrl = "http://api.ipstack.com/";
+const apiKey = "6bec72027b1965bcb7b7078ceb53db2a";
 
 class LocationApp extends Component {
   constructor(props) {
@@ -23,15 +23,15 @@ class LocationApp extends Component {
 
   componentDidMount() {
     this.getUserLocation();
-    sessionStorage.getItem('searchHistory')
+    sessionStorage.getItem("searchHistory")
     &&
     this.setState({
-      searchedLocation: JSON.parse(sessionStorage.getItem('searchHistory'))
+      searchedLocation: JSON.parse(sessionStorage.getItem("searchHistory"))
     });
   }
 
   componentWillUpdate(nextProps, nextState) {
-    sessionStorage.setItem('searchHistory', JSON.stringify(nextState.searchedLocation));
+    sessionStorage.setItem("searchHistory", JSON.stringify(nextState.searchedLocation));
   }
 
   getUserLocation = () => {
@@ -101,8 +101,8 @@ class LocationApp extends Component {
             hasError
             &&
             <ErrorMessage
-              icon='fa-exclamation-circle'
-              text='Results cannot be shown'
+              icon="fa-exclamation-circle"
+              text="Results cannot be shown"
             />
           }
         </div>
@@ -157,26 +157,29 @@ class LocationApp extends Component {
             <div className={`${styles.mapBox} ${styles.box}`}>
               <h2 className={styles.subtitle}>Last search location</h2>
               {
-                searchedLocation.length > 0 &&
-                  <Map className={styles.mapBox}
-                    latitude={lastSearch.latitude}
-                    longitude={lastSearch.longitude}
-                  />
+                searchedLocation.length > 0
+                &&
+                <Map
+                  className={styles.mapBox}
+                  latitude={lastSearch.latitude}
+                  longitude={lastSearch.longitude}
+                />
               }
             </div>
             <div className={`${styles.informationBox} ${styles.box}`}>
               <h2 className={styles.subtitle}>Last search information</h2>
               {
-                searchedLocation.length > 0 &&
-                  <IPInformation
-                    ip={lastSearch.ip}
-                    city={lastSearch.city}
-                    capital={lastSearch.location.capital}
-                    country={lastSearch.country_name}
-                    flag={lastSearch.location.country_flag_emoji}
-                    continent={lastSearch.continent_name}
-                    callingCode={lastSearch.location.calling_code}
-                  />
+                searchedLocation.length > 0
+                &&
+                <IPInformation
+                  ip={lastSearch.ip}
+                  city={lastSearch.city}
+                  capital={lastSearch.location.capital}
+                  country={lastSearch.country_name}
+                  flag={lastSearch.location.country_flag_emoji}
+                  continent={lastSearch.continent_name}
+                  callingCode={lastSearch.location.calling_code}
+                />
               }
             </div>
           </Fragment>

@@ -1,9 +1,9 @@
 import React from "react";
-import styles from './MapMarker.module.css';
+import styles from "./MapMarker.module.css";
 
-const MapMarker = ({ text }) => (
+const MapMarker = ({ icon }) => (
   <div className={styles.mapMarker}>
-    {text}
+    <i className={`fas fa-lg ${icon}`} />
   </div>
 );
 

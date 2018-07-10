@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './ErrorMessage.module.css';
+import React from "react";
+import styles from "./ErrorMessage.module.css";
 
 const ErrorMessage = ({ icon, text }) => (
   <div className={styles.errorContainer}>

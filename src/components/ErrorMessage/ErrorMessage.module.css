@@ -6,7 +6,7 @@
   min-height: 40px;
   display: flex;
   justify-content: center;
-  margin: 5px;
+  margin: 15px 0 0;
 }
 
 .errorIcon {
@@ -17,8 +17,6 @@
   color: #FFF;
   background: var(--errorColor);
   border: 1px solid var(--errorColor);
-  border-top-left-radius: 34px;
-  border-bottom-left-radius: 34px;
 }
 
 .errorText {
@@ -29,6 +27,4 @@
   font-weight: bold;
   background: #FFF;
   border: 1px solid var(--errorColor);
-  border-top-right-radius: 34px;
-  border-bottom-right-radius: 34px;
 }

@@ -1,8 +1,12 @@
+:root {
+  --accentColor: #00B3D2;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: "Questrial", sans-serif;
 }
 
 body {

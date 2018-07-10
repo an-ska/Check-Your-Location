@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react';
-import styles from './SearchForm.module.css';
-import Button from '../Button';
-import ErrorMessage from '../ErrorMessage';
+import React, { Component, Fragment } from "react";
+import styles from "./SearchForm.module.css";
+import Button from "../Button";
+import ErrorMessage from "../ErrorMessage";
 
 const validIPFormat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 
@@ -23,7 +23,8 @@ class SearchForm extends Component {
   }
 
   handleKeyPress = event => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
+      event.preventDefault();
       this.manageSubmittedInput();
     }
   }
@@ -47,24 +48,26 @@ class SearchForm extends Component {
 
     return (
       <Fragment>
-        <input
-          type="text"
-          value={input}
-          onChange={this.handleInputChange}
-          onKeyPress={this.handleKeyPress}
-        />
-        <label>Enter IP</label>
-        <Button
-          text="Search"
-          handleClick={this.handleClick}
-        />
         {
           invalidInput &&
           <ErrorMessage
-            icon='fa-exclamation-triangle'
-            text='Please enter valid IP'
+            icon="fa-exclamation-triangle"
+            text="Please enter valid IP"
           />
         }
+        <div className={styles.searchBox}>
+          <input
+            type="text"
+            value={input}
+            placeholder="Enter IP"
+            onChange={this.handleInputChange}
+            onKeyPress={this.handleKeyPress}
+          />
+          <Button
+            text="Search"
+            handleClick={this.handleClick}
+          />
+        </div>
       </Fragment>
     )
   }
