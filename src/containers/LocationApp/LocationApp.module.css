@@ -4,12 +4,14 @@
   padding-bottom: 15px;
   grid-column: col-start / span 12;
   color: #222;
+  font-size: 32px;
 }
 
 .subtitle {
   text-align: left;
   padding: 15px;
   color: #FFF;
+  font-size: 24px;
   background: var(--accentColor);
 }
 
