@@ -1,17 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styles from './SearchForm.module.css';
 import Button from '../Button';
+import ErrorMessage from '../ErrorMessage';
 
 const validIPFormat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 
 class SearchForm extends Component {
   state = {
-    input: ""
+    input: "",
+    invalidInput: false
   }
 
   handleInputChange = (event) => {
     this.setState({
       input: event.target.value,
+      invalidInput: false
     });
   }
 
@@ -29,7 +32,9 @@ class SearchForm extends Component {
     if (this.state.input.match(validIPFormat)) {
       this.props.getSearchedLocation(this.state.input);
     } else {
-      alert("Please enter valid IP")
+      this.setState({
+        invalidInput: true
+      })
     }
 
     this.setState({
@@ -38,10 +43,10 @@ class SearchForm extends Component {
   }
 
   render() {
-    const { input } = this.state;
+    const { input, invalidInput } = this.state;
 
     return (
-      <div>
+      <Fragment>
         <input
           type="text"
           value={input}
@@ -53,7 +58,14 @@ class SearchForm extends Component {
           text="Search"
           handleClick={this.handleClick}
         />
-      </div>
+        {
+          invalidInput &&
+          <ErrorMessage
+            icon='fa-exclamation-triangle'
+            text='Please enter valid IP'
+          />
+        }
+      </Fragment>
     )
   }
 }
