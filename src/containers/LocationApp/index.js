@@ -95,56 +95,30 @@ class LocationApp extends Component {
     let id = 0;
 
     return (
-      <div className={styles.container}>
-        <h1 className={styles.title}>Check Your Location!</h1>
+      <div className={styles.mainBox}>
+        <div className={styles.fullWidthBox}>
+          {
+            hasError
+            &&
+            <ErrorMessage
+              icon='fa-exclamation-circle'
+              text='Results cannot be shown'
+            />
+          }
+        </div>
         {
           isLoading
-          &&
-          <Loader
-            text="Loading..."
-          />
-        }
-        {
-          hasError
-          &&
-          <ErrorMessage
-            icon='fa-exclamation-circle'
-            text='Results cannot be shown'
-          />
-        }
-        <Map
-          latitude={userLocation.latitude}
-          longitude={userLocation.longitude}
-        />
-        <h2 className={styles.title}>Information about your location</h2>
-        <IPInformation
-          ip={userLocation.ip}
-          city={userLocation.city}
-          capital={userLocation.capital}
-          country={userLocation.country}
-          flag={userLocation.flag}
-          continent={userLocation.continent}
-          callingCode={userLocation.callingCode}
-        />
-        <SearchForm getSearchedLocation={this.getSearchedLocation} />
-        {
-          searchedLocation.length > 0 &&
-            <div>
-              <Map
-                latitude={lastSearch.latitude}
-                longitude={lastSearch.longitude}
-              />
-              <h2 className={styles.title}>Last search information</h2>
-              <IPInformation
-                ip={lastSearch.ip}
-                city={lastSearch.city}
-                capital={lastSearch.location.capital}
-                country={lastSearch.country_name}
-                flag={lastSearch.location.country_flag_emoji}
-                continent={lastSearch.continent_name}
-                callingCode={lastSearch.location.calling_code}
-              />
-              <h2 className={styles.title}>All search information</h2>
+          ?
+          <div className={styles.fullWidthBox}>
+            <Loader
+              text="Loading..."
+            />
+          </div>
+          :
+          <Fragment>
+            <h1 className={styles.title}>Check Your Location!</h1>
+            <div className={`${styles.allSearchInformationBox} ${styles.box}`}>
+              <h2 className={styles.subtitle}>All search information</h2>
               {
                 searchedLocation.map(data => (
                   <AllSearchInformation
@@ -158,6 +132,54 @@ class LocationApp extends Component {
                 ))
               }
             </div>
+            <div className={`${styles.mapBox} ${styles.box}`}>
+              <h2 className={styles.subtitle}>Your location</h2>
+              <Map
+                latitude={userLocation.latitude}
+                longitude={userLocation.longitude}
+              />
+            </div>
+            <div className={`${styles.informationBox} ${styles.box}`}>
+              <h2 className={styles.subtitle}>Information about your location</h2>
+              <IPInformation
+                ip={userLocation.ip}
+                city={userLocation.city}
+                capital={userLocation.capital}
+                country={userLocation.country}
+                flag={userLocation.flag}
+                continent={userLocation.continent}
+                callingCode={userLocation.callingCode}
+              />
+            </div>
+            <div className={`${styles.formBox} ${styles.box}`}>
+              <SearchForm getSearchedLocation={this.getSearchedLocation} />
+            </div>
+            <div className={`${styles.mapBox} ${styles.box}`}>
+              <h2 className={styles.subtitle}>Last search location</h2>
+              {
+                searchedLocation.length > 0 &&
+                  <Map className={styles.mapBox}
+                    latitude={lastSearch.latitude}
+                    longitude={lastSearch.longitude}
+                  />
+              }
+            </div>
+            <div className={`${styles.informationBox} ${styles.box}`}>
+              <h2 className={styles.subtitle}>Last search information</h2>
+              {
+                searchedLocation.length > 0 &&
+                  <IPInformation
+                    ip={lastSearch.ip}
+                    city={lastSearch.city}
+                    capital={lastSearch.location.capital}
+                    country={lastSearch.country_name}
+                    flag={lastSearch.location.country_flag_emoji}
+                    continent={lastSearch.continent_name}
+                    callingCode={lastSearch.location.calling_code}
+                  />
+              }
+            </div>
+          </Fragment>
         }
       </div>
     )

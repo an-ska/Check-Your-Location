@@ -2,4 +2,79 @@
   text-align: center;
   padding-top: 30px;
   padding-bottom: 15px;
+  grid-column: col-start / span 12;
+  color: #222;
+}
+
+.subtitle {
+  text-align: left;
+  padding-bottom: 15px;
+}
+
+.fullWidthBox {
+  grid-column: col-start / span 12;
+}
+
+.box {
+  background: #FFF;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 3px;
+  min-height: 150px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.mainBox {
+  background: #EDEDED;
+  display: grid;
+  grid-template-columns: repeat(12, [col-start] 1fr);
+  color: #222;
+}
+
+.allSearchInformationBox {
+  grid-column: col-start / span 3;
+  grid-row: row-start 2 / span 12;
+}
+
+.mapBox {
+  grid-column: col-start 4 / span 6;
+}
+
+.informationBox {
+  grid-column: col-start 10 / span 3;
+
+}
+
+.formBox {
+  grid-column: col-start 4 / span 9;
+}
+
+@media (max-width: 850px) {
+  .allSearchInformationBox {
+    grid-column: col-start / span 12;
+    grid-row: row-start 5 / span 12;
+  }
+
+  .mapBox {
+    grid-column: col-start / span 7;
+  }
+
+  .informationBox {
+    grid-column: col-start 8 / span 5;
+  }
+
+  .formBox {
+    grid-column: col-start / span 12;
+  }
+}
+
+@media (max-width: 550px) {
+  .mapBox {
+    grid-column: col-start / span 12;
+  }
+
+  .informationBox {
+    grid-column: col-start / span 12;
+  }
 }
