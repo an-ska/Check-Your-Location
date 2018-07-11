@@ -3,7 +3,11 @@ import styles from "./IPInformation.module.css";
 
 const IPInformation = ({ ip, city, capital, country, flag, continent, callingCode }) => (
   <div className={styles.textBox}>
-    <p className={styles.text}>IP: {ip} </p>
+    {
+      ip != null
+      &&
+      <p className={styles.text}>IP: {ip} </p>
+    }
     {
       city != null
       &&

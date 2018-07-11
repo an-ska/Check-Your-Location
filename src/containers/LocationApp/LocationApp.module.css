@@ -58,7 +58,7 @@
 @media (max-width: 850px) {
   .allSearchInformationBox {
     grid-column: col-start / span 12;
-    grid-row: row-start 5 / span 12;
+    grid-row: row-start 7 / span 12;
   }
 
   .mapBox {
