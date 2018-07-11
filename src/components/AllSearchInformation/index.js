@@ -3,11 +3,7 @@ import styles from "./AllSearchInformation.module.css";
 
 const AllSearchInformation = ({ ip, city, country, flag, continent }) => (
   <div className={styles.textBox}>
-    {
-      ip != null
-      &&
-      <p className={styles.text}>IP: {ip} </p>
-    }
+    <p className={styles.text}>IP: {ip} </p>
     {
       city != null
       &&
