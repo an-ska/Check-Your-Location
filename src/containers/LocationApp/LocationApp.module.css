@@ -9,7 +9,7 @@
 
 .subtitle {
   text-align: left;
-  padding: 15px;
+  padding: 10px 15px;
   color: #FFF;
   font-size: 24px;
   background: var(--accentColor);
@@ -29,6 +29,8 @@
 .mainBox {
   display: grid;
   grid-template-columns: repeat(12, [col-start] 1fr);
+  max-width: 1200px;
+  margin: 0 auto;
   color: #222;
 }
 
