@@ -7,7 +7,7 @@ import Map from "../../components/Map";
 import IPInformation from "../../components/IPInformation";
 import AllSearchInformation from "../../components/AllSearchInformation";
 
-const apiUrl = "https://api.ipstack.com/";
+const apiUrl = "http://api.ipstack.com/";
 const apiKey = "6bec72027b1965bcb7b7078ceb53db2a";
 
 class LocationApp extends Component {
