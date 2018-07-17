@@ -56,12 +56,15 @@ class LocationApp extends Component {
             continent: user.continent_name,
             callingCode: user.location.calling_code
           },
-          isLoading: false
         })
       })
       .catch(e => {
         this.setState({
           hasError: true,
+        })
+      })
+      .finally(() => {
+        this.setState({
           isLoading: false,
         })
       });
@@ -78,13 +81,11 @@ class LocationApp extends Component {
             ...this.state.searchedLocation,
             searchedLocation,
           ],
-          isLoading: false
         })
       })
       .catch(e => {
         this.setState({
           hasError: true,
-          isLoading: false,
         })
       });
   }
