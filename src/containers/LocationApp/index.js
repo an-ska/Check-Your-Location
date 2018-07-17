@@ -43,18 +43,18 @@ class LocationApp extends Component {
 
     fetch(requestUrl)
       .then((response) => response.json())
-      .then(user => {
+      .then(userLocation => {
         this.setState({
           userLocation: {
-            latitude: user.latitude,
-            longitude: user.longitude,
-            ip: user.ip,
-            city: user.city,
-            capital: user.location.capital,
-            country: user.country_name,
-            flag: user.location.country_flag_emoji,
-            continent: user.continent_name,
-            callingCode: user.location.calling_code
+            latitude: userLocation.latitude,
+            longitude: userLocation.longitude,
+            ip: userLocation.ip,
+            city: userLocation.city,
+            capital: userLocation.location.capital,
+            country: userLocation.country_name,
+            flag: userLocation.location.country_flag_emoji,
+            continent: userLocation.continent_name,
+            callingCode: userLocation.location.calling_code
           },
         })
       })
