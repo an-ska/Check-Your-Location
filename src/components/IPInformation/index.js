@@ -26,7 +26,13 @@ const IPInformation = ({ ip, city, capital, country, flag, continent, callingCod
     {
       flag != null
       &&
-      <p className={styles.text}>country flag: {flag} </p>
+      <p className={styles.text}>country flag:
+        <img
+          src={flag}
+          className={styles.flag}
+          alt="Country flag"
+        />
+        </p>
     }
     {
       continent != null

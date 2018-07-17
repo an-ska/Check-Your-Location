@@ -23,7 +23,7 @@ class LocationApp extends Component {
 
   componentDidMount() {
     const searchHistory = sessionStorage.getItem("searchHistory");
-    
+
     this.getUserLocation();
     searchHistory
     &&
@@ -54,7 +54,7 @@ class LocationApp extends Component {
             city: userLocation.city,
             capital: userLocation.location.capital,
             country: userLocation.country_name,
-            flag: userLocation.location.country_flag_emoji,
+            flag: userLocation.location.country_flag,
             continent: userLocation.continent_name,
             callingCode: userLocation.location.calling_code
           },
@@ -129,7 +129,7 @@ class LocationApp extends Component {
                     ip={data.ip}
                     city={data.city}
                     country={data.country_name}
-                    flag={data.location.country_flag_emoji}
+                    flag={data.location.country_flag}
                     continent={data.continent_name}
                   />
                 ))
@@ -179,7 +179,7 @@ class LocationApp extends Component {
                   city={lastSearch.city}
                   capital={lastSearch.location.capital}
                   country={lastSearch.country_name}
-                  flag={lastSearch.location.country_flag_emoji}
+                  flag={lastSearch.location.country_flag}
                   continent={lastSearch.continent_name}
                   callingCode={lastSearch.location.calling_code}
                 />
