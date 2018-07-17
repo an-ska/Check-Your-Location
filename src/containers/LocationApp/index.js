@@ -22,11 +22,13 @@ class LocationApp extends Component {
   }
 
   componentDidMount() {
+    const searchHistory = sessionStorage.getItem("searchHistory");
+    
     this.getUserLocation();
-    sessionStorage.getItem("searchHistory")
+    searchHistory
     &&
     this.setState({
-      searchedLocation: JSON.parse(sessionStorage.getItem("searchHistory"))
+      searchedLocation: JSON.parse(searchHistory)
     });
   }
 
